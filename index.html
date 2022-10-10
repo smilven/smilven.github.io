@@ -6,7 +6,10 @@
     <title>Suc e-sport club</title>  
     <link rel="shortcut icon" href="../image/Logo.png">
     <link rel="stylesheet" href="Index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
+
 </head>
 
 
@@ -20,7 +23,7 @@
                     <li><a href="#Home">Home</a></li>                      
                     <li><a href="#About">About</a></li>  
                     <li><a href="#Team">Team</a></li>   
-                    <li><a href="#">Login</a></li>                                                            
+                    <li><a href="#" onclick="login()">Login</a></li>                                                            
                     <li><a href="#Resgiter">Register</a></li>    
                     <li><a href="#Product">Product</a></li>
                     
@@ -158,7 +161,7 @@
                    
             </div>
           <div class="perchase-btn">
-            <input type="button" value="Buy">
+            <input type="button" value="Buy" id="prod-btn" onclick="login()">
           </div>            
            
        </div>
@@ -179,7 +182,7 @@
 
 
 <div class="perchase-btn">
-<input type="button" value="Buy">
+<input type="button" value="Buy" id="prod-btn" onclick="login()">
 </div>  
 
    </div>
@@ -202,7 +205,7 @@
 
 
 <div class="perchase-btn">
-<input type="button" value="Buy">
+<input type="button" value="Buy" id="prod-btn" onclick="login()">
 </div>  
 
 
@@ -222,7 +225,7 @@
                     </div>              
             </div>
           <div class="perchase-btn">
-            <input type="button" value="Buy">
+            <input type="button" value="Buy" id="prod-btn" onclick="login()">
           </div>      
 
        </div>  
@@ -254,7 +257,7 @@
         <div class="Resgiter-right">
             
             <div class="field-group"> 
-            <form action="#">
+            <form action="#" name="regs">
 
                 <label for="username" class="input-label">User Name</label><br>
                 <input type="text"  class="input-field" name="username" required autocomplete="off"/><br>
@@ -262,21 +265,21 @@
 
       
                 <label for="sub_email" class="input-label2">Email Address</label> <br>
-                 <input type="email" id="sub_email" name="email" autocomplete="off"><br>
+                 <input type="email" id="sub_email" name="email" autocomplete="on" required><br>
                   
 
 
                  <label for="password" class="input-label3">Password</label> <br>
-                <input class="form-control" type="password" name="password" id="password"><br>
+                <input class="form-control" type="password" name="reg_pass" id="password" required><br>
 
 
                 
                 <label for="password" class="input-label4">Confirm Password</label> <br>
-                <input class="form-control" type="password" name="password" id="password" required /><br>
+                <input class="form-control" type="password" name="reg_pass2" id="password" required /><br>
                   
 
-                <input type="submit" id="sub_button" name="button"  value="Register">
-                <a href="#">I am already a member</a>
+                <input type="button" id="sub_button" name="button"  value="Register"  onclick="regs_btn()">
+                <a href="#" onclick="login()">I am already a member</a>
               </form>
 
             
@@ -289,13 +292,10 @@
 
 
 
-
-
-
-
-
 <!--================================这边是写START--footer的===================================================-->
 <footer>
+    
+    
 
    <!--Footer的内容-->
     <div class="footer-container">
@@ -330,14 +330,40 @@
  <!--右边的content-->
         <div class="footer-right" >
             <h2>Subcribe Us</h2>
-            <form action="#">
-                <input type="email" id="sub_email" name="email" placeholder="Enter Email" autocomplete="off"  ><br>
-              <input type="button" id="sub_button" name="button"  value="Submit"  >
-              </form>
-            
-           
+        <form name="form1" action="#">
+                <input type="email" id="sub_email" name="email1" placeholder="Enter Email" autocomplete="off" required ><br>
+
+
+              <input type="button" id="sub_button" name="button"  value="Submit" onclick="btn1()">
+              </form>          
         </div>
     </div>
+
+
+
+
+
+ 
+    
+    <div class="popup" id="popup">
+    <div class="popuop-content">
+        <div class="fa" onclick="myFunction3()">&#xf00d;</div>
+        <div class="tick-img"> <img src="../image/Logo.png"></div>
+        <h2>Suc E-sport Club Log in</h2>
+        <h2>Login</h2>
+       <form>
+        <label for="Name">Email:</label>
+        <input type="email" name="email" placeholder="Email/Username" autocomplete="off" required><br>
+        <label for="Password">Password:</label>
+        <input type="password" name="Password" placeholder="*********" required><br>
+        <label ><a href="#Resgiter" onclick=" myFunction3()">Register</a></label>
+        <input type="submit" value="Submit" name="submit" onclick="myFunction4()">
+       </form>
+               
+    </div>
+</div>
+
+ 
 
 
     <!--copyright的content-->
@@ -351,6 +377,94 @@
 
 </footer>
 <!--================================这边是写END--footer的===================================================-->
+
+ 
+<script>
+
+function btn1()
+{
+var empt = document.forms["form1"]["email1"].value;
+
+if (empt == "")
+{
+    swal("Please input a Value");
+return false;
+}
+else 
+{
+   
+swal({
+  title: "Thank you!",
+  text: "We received your subscription.",
+  icon: "success",
+  button: "OK!",
+});
+document.forms["form1"]["email1"].value="";
+
+return true;
+    
+}
+}
+
+function regs_btn(){
+    var empt1 = document.forms["regs"]["username"].value;
+    var empt2 = document.forms["regs"]["email"].value;
+    var empt3 = document.forms["regs"]["reg_pass"].value;
+    var empt4 = document.forms["regs"]["reg_pass2"].value;
+   
+    if ((empt1 && empt2 && empt3 && empt4) ==""){
+        swal("Please fill in all the field");
+return false;
+    }
+
+   else if(empt3 != empt4){
+    swal("Please enter correct password");
+    }
+
+
+
+    else 
+{
+   
+swal({
+  title: "Thank you!",
+  text: "We received your subscription.",
+  icon: "success",
+  button: "OK!",
+});
+
+document.forms["regs"]["username"].value="";
+document.forms["regs"]["email"].value="";
+document.forms["regs"]["reg_pass"].value="";
+document.forms["regs"]["reg_pass2"].value="";
+return true;
+
+
+}
+
+}
+
+
+function login(){
+    document.getElementById("popup").style.display = "flex";
+    document.getElementById("popup").style.position = "fixed";
+} 
+
+    function myFunction2(){
+        document.getElementById("popup").style.display = "none";
+   }  
+
+   function myFunction3(){
+        document.getElementById("popup").style.display = "none";
+   }  
+
+
+   function myFunction4(){
+    alert("This account does not exist");
+   }
+
+
+</script>
 
 
 </body>
