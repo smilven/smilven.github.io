@@ -265,7 +265,7 @@
 
       
                 <label for="sub_email" class="input-label2">Email Address</label> <br>
-                 <input type="email" id="sub_email" name="email" autocomplete="on" required><br>
+                 <input type="email" name="email" id="sub_email"   autocomplete="off" required><br>
                   
 
 
@@ -278,7 +278,7 @@
                 <input class="form-control" type="password" name="reg_pass2" id="password" required /><br>
                   
 
-                <input type="button" id="sub_button" name="button"  value="Register"  onclick="regs_btn()">
+                <input type="button" id="sub_button" name="button"  value="Register"  onclick="regs_btn(document.regs.email)">
                 <a href="#" onclick="login()">I am already a member</a>
               </form>
 
@@ -334,7 +334,7 @@
                 <input type="email" id="sub_email" name="email1" placeholder="Enter Email" autocomplete="off" required ><br>
 
 
-              <input type="button" id="sub_button" name="button"  value="Submit" onclick="btn1()">
+              <input type="button" id="sub_button" name="button"  value="Submit" onclick="ValidateEmail(document.form1.email1)">
               </form>          
         </div>
     </div>
@@ -381,37 +381,51 @@
  
 <script>
 
-function btn1()
-{
-var empt = document.forms["form1"]["email1"].value;
+function ValidateEmail(input) {
 
-if (empt == "")
-{
-    swal("Please input a Value");
-return false;
-}
-else 
-{
-   
-swal({
+var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+if (input.value.match(validRegex)) {
+
+    swal({
   title: "Thank you!",
   text: "We received your subscription.",
   icon: "success",
   button: "OK!",
 });
-document.forms["form1"]["email1"].value="";
 
-return true;
-    
-}
+
+  document.form1.email1.focus();
+  document.forms["form1"]["email1"].value="";
+
+  return true;
+
+} else {
+
+    swal("This email is Invalid");
+
+  document.form1.email1.focus();
+
+  return false;
+
 }
 
-function regs_btn(){
+}
+
+
+
+
+
+function regs_btn(input){
     var empt1 = document.forms["regs"]["username"].value;
     var empt2 = document.forms["regs"]["email"].value;
     var empt3 = document.forms["regs"]["reg_pass"].value;
     var empt4 = document.forms["regs"]["reg_pass2"].value;
-   
+
+    
+    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+
     if ((empt1 && empt2 && empt3 && empt4) ==""){
         swal("Please fill in all the field");
 return false;
@@ -421,11 +435,8 @@ return false;
     swal("Please enter correct password");
     }
 
-
-
-    else 
-{
-   
+    else if(input.value.match(validRegex)){
+ 
 swal({
   title: "Thank you!",
   text: "You are our member.",
@@ -440,6 +451,10 @@ document.forms["regs"]["reg_pass2"].value="";
 return true;
 
 
+}
+
+else{
+    swal("This email is Invalid");
 }
 
 }
