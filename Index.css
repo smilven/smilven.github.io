@@ -793,7 +793,8 @@ footer{
 .popuop-content input[type=submit]{
 width: 80px;
 height: 30px;
-margin-right: 10px;
+margin-top: 10px;
+margin-right: 30px;
 border-radius: 10px;
 background: rgb(0, 0, 0);
 cursor: pointer;
@@ -817,8 +818,8 @@ color: white;
     background: transparent;
     color:rgb(0, 0, 0);
     font-size: 13px;
-    margin-top: 10px;
-    margin-left: 140px;
+    margin-top: 20px;
+    margin-left: 120px;
 }
 /*=====================================================end--POPUP==========================================================*/
 
